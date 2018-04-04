@@ -1,6 +1,6 @@
 module  IR(
         input                   CLOCK_50                ,
-        input                   rst_n                   ,
+        input                   s_rst_n                 ,
         //ir
         input                   IRDA_RXD                ,
         //hex
@@ -18,11 +18,20 @@ module  IR(
 //=====================================================================/
 wire                            ir_dout_vld                     ;
 wire    [31: 0]                 ir_dout                         ; 
-
+reg     [ 1: 0]                 rst_r                           ;
+wire                            rst_n                           ; 
 //======================================================================
 // ***************      Main    Code    ****************
 //======================================================================
+//rst_r  异步清零，同步释放
+always  @(posedge CLOCK_50 or negedge s_rst_n) begin
+        if(s_rst_n == 1'b0)
+            rst_r       <=      'd0;
+        else
+            rst_r       <=      {rst_r[0],1'b1};
+end
 
+assign      rst_n       =       rst_r[1];
 
 
 

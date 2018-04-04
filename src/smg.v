@@ -33,9 +33,9 @@ reg     [ 3: 0]                 hex_in7                         ;
 //ir_data_tmp
 always  @(posedge clk or negedge rst_n) begin
         if(rst_n == 1'b0)
-            {hex_in0,hex_in1,hex_in2,hex_in3,hex_in4,hex_in5,hex_in6,hex_in7}   <=      'd0;
+            {hex_in1,hex_in0,hex_in3,hex_in2,hex_in5,hex_in4,hex_in7,hex_in6}   <=      'd0;
         else if(ir_data_vld == 1'b1)
-            {hex_in0,hex_in1,hex_in2,hex_in3,hex_in4,hex_in5,hex_in6,hex_in7}   <=     ir_data;
+            {hex_in1,hex_in0,hex_in3,hex_in2,hex_in5,hex_in4,hex_in7,hex_in6}   <=     ir_data;
 end
 
 
